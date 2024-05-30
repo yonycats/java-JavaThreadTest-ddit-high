@@ -8,11 +8,17 @@ package kr.or.ddit.basic;
 
 public class T02ThreadTest {
 	public static void main(String[] args) {
+		// start가 아닌 run으로 실행했을 때의 차이점
+		// -> 동시 실행이 아니라 순차적 실행이 시작됨, 멀티 스레드가 아닌 싱글 스레드로 실행이 된다.
+		// 스레드가 독자적으로 실행을 시작하여, 여러개가 동시에 구동할 수 있도록 도와주는 메서드 => start()
+		
 		
 		// 방법 1 : Thread 클래스를 상속한  class의 인스턴스를 생성한 후, 이 인스턴스의 start() 메서드를 실행한다. 
-		// MultiThread 라고 할 수 있음. 왜?
+		// MultiThread 라고 할 수 있음, 메인도 스레드에 포함
 		Thread th1 = new MyThread1();
 		th1.start(); // 스레드 구동시키기
+		
+		
 		
 		// 방법 2 : Runnable 인터페이스를 구현한 class의 인스턴스를 생성한 후, 이 인스턴스를  Thread 객체 생성시
 		//		     생성자의 파라미터 값으로 넘겨준다.
@@ -22,6 +28,8 @@ public class T02ThreadTest {
 		Runnable r = new MyRunnable();
 		Thread th2 = new Thread(r);
 		th2.start();
+		
+		
 		
 		// 방법 3 : 익명 클래스를 이용하는 방법
 		// Runnable 인터페이스를 구현한 익명 클래스를  Thread 인스턴스를 생성할 때 파라미터 값으로 넘겨준다.
@@ -35,13 +43,13 @@ public class T02ThreadTest {
 					try {
 						// Thread.sleep(시간) => 주어진 시간동안 작업을 잠시 멈춘다.
 						// 시간은 밀리세컨드(ms) 단위를 사용한다. 1초 = 1000ms
-						Thread.sleep(100);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-				
 			}
+			
 		});
 		th3.start();
 		
@@ -62,7 +70,7 @@ class MyThread1 extends Thread {
 			try {
 				// Thread.sleep(시간) => 주어진 시간동안 작업을 잠시 멈춘다.
 				// 시간은 밀리세컨드(ms) 단위를 사용한다. 1초 = 1000ms
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -82,7 +90,7 @@ class MyRunnable implements Runnable {
 			try {
 				// Thread.sleep(시간) => 주어진 시간동안 작업을 잠시 멈춘다.
 				// 시간은 밀리세컨드(ms) 단위를 사용한다. 1초 = 1000ms
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -91,8 +99,3 @@ class MyRunnable implements Runnable {
 	}
 	
 }
-
-
-
-
-
