@@ -78,7 +78,7 @@ class DisplayCharacter extends Thread implements Comparable<DisplayCharacter>{
 			System.out.println(name + "의 출력 문자 : " +ch);
 			
 			try {
-				Thread.sleep((int)(Math.random()*301+200)); // 200~500사이의 난수
+				Thread.sleep((int)(Math.random()*301+200)); // 0.2초~0.5초 사이의 난수
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

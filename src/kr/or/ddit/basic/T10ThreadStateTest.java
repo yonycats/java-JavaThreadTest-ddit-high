@@ -71,17 +71,17 @@ class TargetThread extends Thread {
 	@Override
 	public void run() {
 		
-		// RUNNABLE 상태
+		// RUNNABLE 상태 (실행 중 또는 실행 가능한 상태)
 		for (long i=1; i<=10000000000L; i++) {} // 시간 지연용
 
-		// TIMED_WAITING 상태
+		// TIMED_WAITING 상태 (일시정지 상태)
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		// RUNNABLE 상태
+		// RUNNABLE 상태 (실행 중 또는 실행 가능한 상태)
 		for (long i=1; i<=10000000000L; i++) {} // 시간 지연용
 	}
 	

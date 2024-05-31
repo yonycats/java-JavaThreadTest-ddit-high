@@ -5,9 +5,13 @@ public class T09ThreadDaemonTest {
 
 		AutoSaveThread autoTh = new AutoSaveThread();
 		
-		// 데몬 스레드로 설정하기 (start() 실행 전에 설정해야 한다.)
+		// 데몬 스레드로 설정하기 (start() 실행 전에 설정해야 한다. 
+		// 그렇지 않으면 IllegalThreadStateException이 발생한다.
 		
 		// 디폴트값은 false임, true로 세팅한 순간 데몬으로 세팅한 것
+		// 이 부분이 없으면 종료되지 않는다.        
+		// 디폴트: 독립==> setDaemon(true): 데몬 스레드로서
+		// (메인 스레드 종료시 종속 스레드는 작업을 다 끝내지 못해도 메인 스레드의 종료와 함께 종료된다.)
 		autoTh.setDaemon(true);
 		
 		// 데몬을 실행하지 않으면, 조건이 무한루프이기 때문에 스레드가 계속 돌아감
