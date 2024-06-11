@@ -7,22 +7,21 @@ package kr.or.ddit.basic;
 public class T12ThreadStopTest {
 	public static void main(String[] args) {
 		
-		/* ThreadStopEx1 예제
+		// ThreadStopEx1 예제
 		 
-		ThreadStopEx1 th1 = new ThreadStopEx1();
-		th1.start();
+//		ThreadStopEx1 th1 = new ThreadStopEx1();
+//		th1.start();
+//		
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		// 스레스 종료시키기
+////		th1.stop();
+//		th1.setStoped(true);
 		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		// 스레스 종료시키기
-//		th1.stop();
-		th1.setStoped(true);
-		
-		*/
 		
 		
 		
@@ -35,7 +34,7 @@ public class T12ThreadStopTest {
 			e.printStackTrace();
 		}
 		
-		th2.interrupt(); // 인터럽트 걸기
+		th2.interrupt(); // 메서드 인터럽트 걸기
 		
 		
 	}
@@ -67,7 +66,7 @@ class ThreadStopEx1 extends Thread {
 }
 
 
-//// interrupt()메서드를 이용하여 스레드를 종료시키는 방법
+// interrupt()메서드를 이용하여 스레드를 종료시키는 방법
 //class ThreadStopEx2 extends Thread {
 //	
 //	@Override
@@ -89,17 +88,38 @@ class ThreadStopEx1 extends Thread {
 //}
 
 
-////interrupt()메서드를 이용하여 스레드를 종료시키는 방법 - 검사방법  1
+//interrupt()메서드를 이용하여 스레드를 종료시키는 방법 - 검사방법  1
+class ThreadStopEx2 extends Thread {
+	
+	@Override
+	public void run() {
+		while (true) {
+			System.out.println("스레드 처리 중..");
+			
+			// 검사방법  1 => 스레드의 인스턴스 메서드를 이용하는 방법
+			if(this.isInterrupted()) {
+				System.out.println("인스턴스 메서드 isInterrupted() 호출됨");
+				break;
+			}
+		}
+		
+		System.out.println("자원 정리 중..");
+		System.out.println("실행 종료");
+	}
+}
+
+
+//interrupt()메서드를 이용하여 스레드를 종료시키는 방법 - 검사방법  2
 //class ThreadStopEx2 extends Thread {
 //	
 //	@Override
 //	public void run() {
 //		while (true) {
 //			System.out.println("스레드 처리 중..");
-//			
-//			// 검사방법  1 => 스레드의 인스턴스 메서드를 이용하는 방법
-//			if(this.isInterrupted()) {
-//				System.out.println("인스턴스 메서드 isInterrupted() 호출됨");
+
+//			// 검사방법 2 => 스레드의 정적 메서드를 이용하는 방법
+//			if (Thread.interrupted()) {
+//				System.out.println("정적 메서드 interrupted() 호출됨");
 //				break;
 //			}
 //		}
@@ -109,24 +129,3 @@ class ThreadStopEx1 extends Thread {
 //		System.out.println("실행 종료");
 //	}
 //}
-
-
-//interrupt()메서드를 이용하여 스레드를 종료시키는 방법 - 검사방법  2
-class ThreadStopEx2 extends Thread {
-	
-	@Override
-	public void run() {
-		while (true) {
-			System.out.println("스레드 처리 중..");
-			// 검사방법 2 => 스레드의 정적 메서드를 이용하는 방법
-			if (Thread.interrupted()) {
-				System.out.println("정적메서드 interrupted() 호출됨");
-				break;
-			}
-		}
-		
-		
-		System.out.println("자원 정리 중..");
-		System.out.println("실행 종료");
-	}
-}
